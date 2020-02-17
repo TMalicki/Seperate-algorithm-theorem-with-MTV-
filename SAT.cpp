@@ -15,13 +15,14 @@ void SAT::setNormalVector(sf::Vector2f& normVector, sf::Vector2f& vector)
 	normVector = sf::Vector2f(-vector.y, vector.x);
 }
 
-void SAT::setProjectionVertex(sf::Vector2f& normVector, sf::VertexArray* obj)
+void SAT::setProjectionVertex(float* projectionVertexObj, sf::Vector2f& normVector, sf::VertexArray* obj)
 {
 	/// 0 - topLeftCorner; 1 - topRightCorner; 2 - bottomRightCorner; 3 - bottomLeftCorner
 	for (int i = 0; i < 4; i++)
 	{
-		projectionVertexObj1[i] = normVector.x * (*obj)[i].position.x + normVector.y * (*obj)[i].position.y;
+		projectionVertexObj[i] = normVector.x * (*obj)[i].position.x + normVector.y * (*obj)[i].position.y;
 	}
+	//std::cout << (*obj)[1].position.x << std::endl;
 }
 
 void SAT::searchMinMax(float& objMin, float& objMax, float* projectionVertexObj)
@@ -39,6 +40,13 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 {
 		bool collided = true;
 		int counter = 1;
+
+		obj1.calculateCornersPos();
+		obj2.calculateCornersPos();
+
+		obj1.showCollisionArea();
+		obj2.showCollisionArea();
+
 		/// vertexes of object 1 are: a - topleftcorner, b - toprightcorner, c - bottomrightcorner, d - bottomleftcorner (clockwise)
 		/// vertexes of object 2 are: e, f, g, h (clockwise)
 		setProjectionVector(obj1.getCollisionArea(), obj2.getCollisionArea());
@@ -61,14 +69,11 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 			/// for normvectorghtraffic
 			else if (counter == 4) normVector = normVectorBCobj2;
 	
-			setProjectionVertex(normVector, obj1.getCollisionArea());
+			setProjectionVertex(projectionVertexObj1, normVector, obj1.getCollisionArea());
 			searchMinMax(obj1Min, obj1Max, projectionVertexObj1);
 
-			setProjectionVertex(normVector, obj2.getCollisionArea());
+			setProjectionVertex(projectionVertexObj2, normVector, obj2.getCollisionArea());
 			searchMinMax(obj2Min, obj2Max, projectionVertexObj2);
-	
-			std::cout << obj1Min << " " << obj1Max << std::endl;
-			std::cout << obj2Min << " " << obj2Max << std::endl;
 
 			/// negation
 			if (!(((obj1Min < obj2Max) && (obj1Min > obj2Min)) || ((obj2Min < obj1Max) && (obj2Min > obj1Min))))

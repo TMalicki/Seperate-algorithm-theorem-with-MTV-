@@ -6,9 +6,6 @@ RectObj::RectObj(sf::Color color, float x, float y)
 	object.setSize(sf::Vector2f(x, y));
 	object.setOrigin(object.getGlobalBounds().width / 2, object.getGlobalBounds().height / 2);
 	object.setFillColor(color);
-
-	calculateCornersPos();
-	showCollisionArea();
 }
 
 void RectObj::calculateCornersPos()
