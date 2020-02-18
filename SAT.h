@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "RectObj.h"
 
 class SAT 
@@ -41,6 +42,8 @@ public:
 	sf::Vector2f& getVectorBCobj1() { return vectorBCobj1; }
 	sf::Vector2f& getVectorABobj2() { return vectorABobj2; }
 	sf::Vector2f& getVectorBCobj2() { return vectorBCobj2; }
+
+	std::vector<sf::Vector2f> getVectorProjection();
 
 	float getDepthCollision() { return distance; }
 	int getVectorOfCollision() { return oppositeCounter; }

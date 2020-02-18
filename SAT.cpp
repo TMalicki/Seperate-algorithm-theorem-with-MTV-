@@ -39,7 +39,7 @@ void SAT::searchMinMax(float& objMin, float& objMax, float* projectionVertexObj)
 
 bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 {
-	using std::cout; using std::endl;
+	//using std::cout; using std::endl;
 
 
 		bool collided = true;
@@ -90,7 +90,13 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 			if (counter == 1)
 			{
 				distance = abs(obj1Max - obj2Min);
-				if (distance > abs(obj2Max - obj1Min)) distance = abs(obj2Max - obj1Min);
+				oppositeCounter = counter;
+
+				if (distance > abs(obj2Max - obj1Min))
+				{
+					distance = abs(obj2Max - obj1Min);
+					oppositeCounter = counter;
+				}
 			}
 			else
 			{
@@ -119,13 +125,25 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 			//	cout << "collided: " << collided << endl;
 		}
 
-		cout << distance << endl;
-		cout << oppositeCounter << endl;
-
+		//cout << distance << endl;
+		std::cout << obj1Min - obj2Max << " " << obj1Max-obj2Min << " "
+		<< obj2Min-obj1Max << " " << obj2Max-obj1Min << std::endl;
 
 
 		//obj2.getObjShape().move(x, y);
 
 
 		return collided;
+}
+
+std::vector<sf::Vector2f> SAT::getVectorProjection()
+{
+	std::vector<sf::Vector2f> temp;
+
+	temp.push_back(vectorABobj1);
+	temp.push_back(vectorBCobj1);
+	temp.push_back(vectorABobj2);
+	temp.push_back(vectorBCobj2);
+
+	return temp;
 }
