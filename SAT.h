@@ -26,6 +26,8 @@ private:
 	float obj2Min;
 	float obj2Max;
 
+	float distance = 0.0;
+	int oppositeCounter = 1;
 public:
 	//SAT() {};
 
@@ -40,6 +42,8 @@ public:
 	sf::Vector2f& getVectorABobj2() { return vectorABobj2; }
 	sf::Vector2f& getVectorBCobj2() { return vectorBCobj2; }
 
+	float getDepthCollision() { return distance; }
+	int getVectorOfCollision() { return oppositeCounter; }
 
 	virtual ~SAT() {};
 };

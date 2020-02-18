@@ -20,7 +20,8 @@ void SAT::setProjectionVertex(float* projectionVertexObj, sf::Vector2f& normVect
 	/// 0 - topLeftCorner; 1 - topRightCorner; 2 - bottomRightCorner; 3 - bottomLeftCorner
 	for (int i = 0; i < 4; i++)
 	{
-		projectionVertexObj[i] = normVector.x * (*obj)[i].position.x + normVector.y * (*obj)[i].position.y;
+		sf::Vector2f pos = (*obj)[i].position;
+		projectionVertexObj[i] = (normVector.x * pos.x + normVector.y * pos.y) / sqrt(pow(normVector.x, 2.0) + pow(normVector.y, 2.0));
 	}
 	//std::cout << (*obj)[1].position.x << std::endl;
 }
@@ -38,6 +39,9 @@ void SAT::searchMinMax(float& objMin, float& objMax, float* projectionVertexObj)
 
 bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 {
+	using std::cout; using std::endl;
+
+
 		bool collided = true;
 		int counter = 1;
 
@@ -75,12 +79,53 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 			setProjectionVertex(projectionVertexObj2, normVector, obj2.getCollisionArea());
 			searchMinMax(obj2Min, obj2Max, projectionVertexObj2);
 
-			/// negation
+			/// negation of collision
+			//int distance = obj2Max - obj1Min;
+			//int distance = 
 			if (!(((obj1Min < obj2Max) && (obj1Min > obj2Min)) || ((obj2Min < obj1Max) && (obj2Min > obj1Min))))
 			{
 				collided = false;
 			}
+
+			if (counter == 1)
+			{
+				distance = abs(obj1Max - obj2Min);
+				if (distance > abs(obj2Max - obj1Min)) distance = abs(obj2Max - obj1Min);
+			}
+			else
+			{
+				if (distance > abs(obj1Max - obj2Min))
+				{
+					distance = abs(obj1Max - obj2Min);
+					oppositeCounter = counter;
+				}
+				if (distance > abs(obj2Max - obj1Min))
+				{
+					distance = abs(obj2Max - obj1Min);
+					oppositeCounter = counter;
+				}
+			}
+
+
 			counter++;
+
+			//std::cout << "position: " << obj1.getObjShape().getPosition().y << std::endl;
+			//std::cout << counter << " : " << obj1Max - obj2Min << std::endl
+
+			//	cout << "counter: " << counter << " Obj1Max: " << obj1Max - obj2Min << endl;
+				//cout << "counter: " << counter << " Obj1Min: " << obj1Min << endl;
+			//	cout << "counter: " << counter << " Obj2Max: " << obj2Max - obj1Min << endl;
+				//cout << "counter: " << counter << " Obj2Min: " << obj2Min << endl;
+			//	cout << "collided: " << collided << endl;
 		}
+
+		cout << distance << endl;
+		cout << oppositeCounter << endl;
+
+
+
+		//obj2.getObjShape().move(x, y);
+
+
 		return collided;
 }
