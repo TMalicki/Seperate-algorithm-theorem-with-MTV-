@@ -23,7 +23,6 @@ void SAT::setProjectionVertex(float* projectionVertexObj, sf::Vector2f& normVect
 		sf::Vector2f pos = (*obj)[i].position;
 		projectionVertexObj[i] = (normVector.x * pos.x + normVector.y * pos.y) / sqrt(pow(normVector.x, 2.0) + pow(normVector.y, 2.0));
 	}
-	//std::cout << (*obj)[1].position.x << std::endl;
 }
 
 void SAT::searchMinMax(float& objMin, float& objMax, float* projectionVertexObj)
@@ -39,9 +38,6 @@ void SAT::searchMinMax(float& objMin, float& objMax, float* projectionVertexObj)
 
 bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 {
-	//using std::cout; using std::endl;
-
-
 		bool collided = true;
 		int counter = 1;
 
@@ -80,8 +76,6 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 			searchMinMax(obj2Min, obj2Max, projectionVertexObj2);
 
 			/// negation of collision
-			//int distance = obj2Max - obj1Min;
-			//int distance = 
 			if (!(((obj1Min < obj2Max) && (obj1Min > obj2Min)) || ((obj2Min < obj1Max) && (obj2Min > obj1Min))))
 			{
 				collided = false;
@@ -111,28 +105,8 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 					oppositeCounter = counter;
 				}
 			}
-
-
 			counter++;
-
-			//std::cout << "position: " << obj1.getObjShape().getPosition().y << std::endl;
-			//std::cout << counter << " : " << obj1Max - obj2Min << std::endl
-
-			//	cout << "counter: " << counter << " Obj1Max: " << obj1Max - obj2Min << endl;
-				//cout << "counter: " << counter << " Obj1Min: " << obj1Min << endl;
-			//	cout << "counter: " << counter << " Obj2Max: " << obj2Max - obj1Min << endl;
-				//cout << "counter: " << counter << " Obj2Min: " << obj2Min << endl;
-			//	cout << "collided: " << collided << endl;
 		}
-
-		//cout << distance << endl;
-		std::cout << obj1Min - obj2Max << " " << obj1Max-obj2Min << " "
-		<< obj2Min-obj1Max << " " << obj2Max-obj1Min << std::endl;
-
-
-		//obj2.getObjShape().move(x, y);
-
-
 		return collided;
 }
 
