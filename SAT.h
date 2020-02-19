@@ -36,6 +36,7 @@ public:
 	void setNormalVector(sf::Vector2f&, sf::Vector2f&);
 	void setProjectionVertex(float*, sf::Vector2f&, sf::VertexArray*);
 	void searchMinMax(float&, float&, float*);
+	void normalize(sf::Vector2f&);
 	bool collisionSAT(RectObj&, RectObj&);
 	
 	sf::Vector2f& getVectorABobj1() { return vectorABobj1; }
@@ -45,6 +46,7 @@ public:
 
 	std::vector<sf::Vector2f> getVectorProjection();
 
+	void calculateMTV(int );
 	float getDepthCollision() { return distance; }
 	int getVectorOfCollision() { return oppositeCounter; }
 
