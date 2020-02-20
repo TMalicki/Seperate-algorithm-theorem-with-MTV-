@@ -6,7 +6,7 @@ int main()
 {
 	const sf::Vector2i windowSize = sf::Vector2i(800, 600);
 
-	sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(windowSize.x, windowSize.y), "MTV based on SAT algorithm.");
 	Physic physic;
 
 	while (window.isOpen())
