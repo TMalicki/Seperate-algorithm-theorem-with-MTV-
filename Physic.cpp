@@ -61,7 +61,7 @@ sf::Vector2f Physic::calculateMoveValue(RectObj& obj1, RectObj& obj2, SAT& sat)
 	int vect = sat.getVectorOfCollision();	  // vector in which collision is detected (it could be 
 						  // normal to AB or BC of obj1 or obj2
 	
-	sf::Vector2f moveCoord = sat.getVectorProjection()[vect - 1];
+	sf::Vector2f moveCoord = sat.getEdges()[vect - 1];
 
 	sat.normalize(moveCoord);
 
