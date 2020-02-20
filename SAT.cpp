@@ -1,7 +1,7 @@
 #include "SAT.h"
 
-
-void SAT::setProjectionVector(sf::VertexArray* obj1, sf::VertexArray* obj2)
+// calculate edges
+void SAT::calculateEdges(sf::VertexArray* obj1, sf::VertexArray* obj2)
 {
 	/// 0 - topLeftCorner; 1 - topRightCorner; 2 - bottomRightCorner; 3 - bottomLeftCorner
 	vectorABobj1 = sf::Vector2f((*obj1)[1].position.x - (*obj1)[0].position.x, (*obj1)[1].position.y - (*obj1)[0].position.y);
@@ -55,7 +55,7 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 
 		/// vertexes of object 1 are: a - topleftcorner, b - toprightcorner, c - bottomrightcorner, d - bottomleftcorner (clockwise)
 		/// vertexes of object 2 are: e, f, g, h (clockwise)
-		setProjectionVector(obj1.getCollisionArea(), obj2.getCollisionArea());
+		calculateEdges(obj1.getCollisionArea(), obj2.getCollisionArea());
 
 		setNormalVector(normVectorABobj1, getVectorABobj1());
 		setNormalVector(normVectorBCobj1, getVectorBCobj1());
