@@ -32,7 +32,7 @@ private:
 public:
 	//SAT() {};
 
-	void setProjectionVector(sf::VertexArray*, sf::VertexArray*);
+	void calculateEdges(sf::VertexArray*, sf::VertexArray*);
 	void setNormalVector(sf::Vector2f&, sf::Vector2f&);
 	void setProjectionVertex(float*, sf::Vector2f&, sf::VertexArray*);
 	void searchMinMax(float&, float&, float*);
