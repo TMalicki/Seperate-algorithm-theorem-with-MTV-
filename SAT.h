@@ -44,7 +44,7 @@ public:
 	sf::Vector2f& getVectorABobj2() { return vectorABobj2; }
 	sf::Vector2f& getVectorBCobj2() { return vectorBCobj2; }
 
-	std::vector<sf::Vector2f> getVectorProjection();
+	std::vector<sf::Vector2f> getEdges();
 
 	void calculateMTV(int );
 	float getDepthCollision() { return distance; }
