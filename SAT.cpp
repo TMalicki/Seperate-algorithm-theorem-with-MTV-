@@ -92,7 +92,7 @@ bool SAT::collisionSAT(RectObj& obj1, RectObj& obj2)
 		return collided;
 }
 
-std::vector<sf::Vector2f> SAT::getVectorProjection()
+std::vector<sf::Vector2f> SAT::getEdges()
 {
 	std::vector<sf::Vector2f> temp;
 
