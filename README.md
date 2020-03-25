@@ -17,13 +17,8 @@ Two objects are colliding with each other. First one responds to the mouse movem
   
   <body>
     <div id="container"> 
-        <div id="logo">
-            <img src="images/MTV1.png" style="float: left;" alt="Image" width="300"/>
-        </div>     
-      
-        <div id="nav">
-            <img src="images/MTV2.png" style="float: left;" alt="Image" width="300"/>
-        </div>      
+        <div id="logo"> <img src="images/MTV1.png" style="float: left;" alt="Image" width="300"/> </div>     
+        <div id="nav"> <img src="images/MTV2.png" style="float: left;" alt="Image" width="300"/></div>      
      </div>
   </body>
 </html>
